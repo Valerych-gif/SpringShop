@@ -36,7 +36,7 @@ public class RegistrationController {
     @GetMapping("/showRegistrationForm")
     public String showMyLoginPage(Model theModel) {
         theModel.addAttribute("systemUser", new SystemUser());
-        return "registration-form";
+        return "registration/registration-form";
     }
 
     // Binding Result после @ValidModel !!!
@@ -50,7 +50,6 @@ public class RegistrationController {
         }
         User existing = userService.findByUserName(userName);
         if (existing != null) {
-            // theSystemUser.setUserName(null);
             theModel.addAttribute("systemUser", theSystemUser);
             theModel.addAttribute("registrationError", "User name already exists");
             logger.debug("User name already exists.");
@@ -58,6 +57,6 @@ public class RegistrationController {
         }
         userService.save(theSystemUser);
         logger.debug("Successfully created user: " + userName);
-        return "registration-confirmation";
+        return "registration/registration-confirmation";
     }
 }

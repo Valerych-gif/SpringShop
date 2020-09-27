@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head::head"/>
+
+<body>
+
+<div th:replace="~{fragments/navigation :: navi(Shop)}"/>
+
+<div class="container">
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th>#</th>
+            <th>Категория</th>
+            <th>Название товара</th>
+            <th>Цена</th>
+            <th></th>
+        </tr>
+        </thead>
+
+        <tr class="responsive-row" th:each="product : ${products}">
+            <td th:text="${product.id}"/>
+            <td th:text="${product.category.title}"/>
+            <td>
+                <p  class="font-weight-bold" th:text="${product.title}"></p>
+                <p th:text="${product.shortDescription}"></p>
+            </td>
+            <td th:text="${product.price}"/>
+            <td>
+                <a th:href="@{'/cart/add/' + ${product.id}}">Добавить в корзину</a>
+            </td>
+        </tr>
+    </table>
+
+</div>
+<footer th:replace="~{fragments/footer::footer}"/>
+</body>
+</html>

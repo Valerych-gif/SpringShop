@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace = "fragments/head::head"/>
+
+<body>
+
+<div th:replace="~{fragments/navigation :: navi(Shop)}"/>
+
+<div class="site-section" id="home-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mb-5">
+                <h1 class="text-white serif text-uppercase mb-4">Meet Your Next Book</h1>
+                <p class="text-white mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis sint alias, doloribus assumenda totam porro ex impedit, recusandae voluptatibus sed.</p>
+                <p><a href="#" class="btn btn-white px-4 py-3">Buy This Book On Amazon</a></p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <img src="images/book_1.png" alt="Image" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="~{fragments/footer::footer}"/>
+</body>
+</html>

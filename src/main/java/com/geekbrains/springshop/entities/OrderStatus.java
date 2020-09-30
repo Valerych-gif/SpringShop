@@ -1,13 +1,15 @@
 package com.geekbrains.springshop.entities;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "categories")
 @Data
-public class Category {
+@NoArgsConstructor
+@Table(name = "orders_statuses")
+public class OrderStatus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -16,6 +18,8 @@ public class Category {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "description")
-    private String description;
+    @Override
+    public String toString() {
+        return "Role{" + "id=" + id + ", title='" + title + '\'' + '}';
+    }
 }

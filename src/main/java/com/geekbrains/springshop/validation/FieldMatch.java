@@ -1,4 +1,4 @@
-package com.geekbrains.springshop.utils;
+package com.geekbrains.springshop.validation;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -7,7 +7,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Constraint(validatedBy = FieldMatchValidator.class)
+@Constraint(validatedBy = com.geekbrains.springshop.validation.FieldMatchValidator.class)
 @Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface FieldMatch {

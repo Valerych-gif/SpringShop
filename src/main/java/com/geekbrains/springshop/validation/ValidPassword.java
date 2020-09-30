@@ -1,4 +1,4 @@
-package com.geekbrains.springshop.utils;
+package com.geekbrains.springshop.validation;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -7,11 +7,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Constraint(validatedBy = EmailValidator.class)
+@Constraint(validatedBy = PasswordValidator.class)
 @Target({ ElementType.TYPE, ElementType.FIELD, ElementType.ANNOTATION_TYPE })
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ValidEmail {
-	String message() default "Invalid email";
+public @interface ValidPassword {
+	String message() default "Invalid password";
 	Class<?>[] groups() default {};
 	Class<? extends Payload>[] payload() default {};
 }

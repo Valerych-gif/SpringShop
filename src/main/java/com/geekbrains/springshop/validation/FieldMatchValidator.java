@@ -1,4 +1,4 @@
-package com.geekbrains.springshop.utils;
+package com.geekbrains.springshop.validation;
 
 import org.springframework.beans.BeanWrapperImpl;
 

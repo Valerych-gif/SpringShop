@@ -5,7 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "orderitems")
+@Table(name = "orders_item")
 @Data
 public class OrderItem {
     @Id
@@ -28,5 +28,6 @@ public class OrderItem {
 
     @ManyToOne
     @JoinColumn(name = "order_id")
+//    @JsonBackReference
     private Order order;
 }

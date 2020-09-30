@@ -4,9 +4,11 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
-@Data
 @Entity
+@Data
 @Table(name = "users")
 public class User {
     @Id
@@ -38,9 +40,18 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "orders", joinColumns = @JoinColumn(name = "id"))
-    Collection<Order> orders;
+
+    public static final Map<String, String> COLUMN_MAPPINGS = new HashMap<>();
+
+    static {
+        COLUMN_MAPPINGS.put("id", "id");
+        COLUMN_MAPPINGS.put("username", "userName");
+        COLUMN_MAPPINGS.put("password", "password");
+        COLUMN_MAPPINGS.put("first_name", "firstName");
+        COLUMN_MAPPINGS.put("last_name", "lastName");
+        COLUMN_MAPPINGS.put("email", "email");
+        COLUMN_MAPPINGS.put("phone", "phone");
+    }
 
     public User() {
     }
@@ -61,14 +72,21 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.roles = roles;
         this.phone = phone;
+        this.roles = roles;
     }
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", userName='" + userName + '\'' + ", password='" + "*********" + '\''
-                + ", firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + ", email='" + email + '\''
-                + ", roles=" + roles + '}';
+        return "User{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", roles=" + roles +
+                '}';
     }
 }

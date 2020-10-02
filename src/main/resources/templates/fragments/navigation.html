@@ -25,11 +25,18 @@
                     <nav class="site-navigation text-right" role="navigation">
                         <div class="container">
 
-                            <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3 "><a href="#" class="site-menu-toggle js-menu-toggle text-black">
+                            <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3 "><a href="#"
+                                                                                           class="site-menu-toggle js-menu-toggle text-black">
                                 <span class="icon-menu h3"></span>
                             </a></div>
 
                             <ul class="site-menu main-menu js-clone-nav d-none d-lg-block">
+
+                                <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item"
+                                    th:classappend="${activeTab == 'AdminDashboard' ? 'active' : ''}">
+                                    <a class="nav-link" th:href="@{/admin}">Панель администратора<span
+                                            class="sr-only">(current)</span></a>
+                                </li>
                                 <li class="nav-item" th:classappend="${activeTab == 'Home' ? 'active' : ''}">
                                     <a class="nav-link" th:href="@{/}">Главная<span class="sr-only">(current)</span></a>
                                 </li>
@@ -39,19 +46,19 @@
                                 <li class="nav-item" th:classappend="${activeTab == 'ShoppingCart' ? 'active' : ''}">
                                     <a class="nav-link" th:href="@{/cart}">Корзина<span class="sr-only">(current)</span></a>
                                 </li>
-                                <li class="nav-item" th:classappend="${activeTab == 'RegistrationForm' ? 'active' : ''}">
-                                    <a class="nav-link" th:href="@{/register/showRegistrationForm}">Добавить пользователя<span class="sr-only">(current)</span></a>
+                                <li class="nav-item"
+                                    th:classappend="${activeTab == 'RegistrationForm' ? 'active' : ''}">
+                                    <a class="nav-link" th:href="@{/register/showRegistrationForm}">Добавить
+                                        пользователя<span class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item" sec:authorize="isAnonymous()">
                                     <a class="nav-link" th:href="@{/login}">Войти</a>
                                 </li>
-                                <div sec:authorize="isAuthenticated()">
-                                    <li class="nav-item">
-                                        <form th:action="@{/logout}" method="POST">
-                                            <input type="submit" class="btn btn-danger" value="Logout"/>
-                                        </form>
-                                    </li>
-                                </div>
+                                <li class="nav-item" sec:authorize="isAuthenticated()">
+                                    <form th:action="@{/logout}" method="POST">
+                                        <input type="submit" class="nav-link" value="Logout"/>
+                                    </form>
+                                </li>
                             </ul>
                         </div>
                     </nav>

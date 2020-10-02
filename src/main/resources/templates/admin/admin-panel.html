@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head::head"/>
+
+<body>
+
+<div th:replace="~{fragments/navigation :: navi(AdminDashboard)}"/>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <form th:action="@{/admin/addcategory}" method="post">
+                <div class="form-group">
+                    <label for="categoryname" class="text-white">Category Name</label>
+                    <input type="text" class="form-control" id="categoryname" name="categoryname">
+                    <label for="categorydescription" class="text-white">Category Description</label>
+                    <input type="text" class="form-control" id="categorydescription" name="categorydescription">
+                </div>
+                <button type="submit" class="btn btn-light">Add</button>
+            </form>
+        </div>
+        <div class="col-sm">
+            <form th:action="@{/admin/addrole}" method="post">
+                <div class="form-group">
+                    <label for="rolename" class="text-white">Add new user's role</label>
+                    <input type="text" class="form-control" id="rolename" name="rolename">
+                </div>
+                <button type="submit" class="btn btn-light">Add</button>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm">
+            <h1 class="text-white">Categories</h1>
+            <div class="card mb-3" style="width: 18rem;" th:each="category : ${categories}">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${category.title}"/>
+                    <p class="card-text" th:text="${category.description}"/>
+                    <a th:href="@{'/admin/category/delete/' + ${category.id}}" class="card-link">Delete</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <h1 class="text-white">Users roles</h1>
+            <div class="card mb-3" style="width: 18rem;" th:each="role : ${roles}">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${role.name}"/>
+                    <a th:href="@{'/admin/role/delete/' + ${role.id}}" class="card-link">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="~{fragments/footer::footer}"/>
+</body>
+</html>

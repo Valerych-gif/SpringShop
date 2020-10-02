@@ -86,7 +86,6 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
-                ", roles=" + roles +
                 '}';
     }
 }

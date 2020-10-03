@@ -32,18 +32,18 @@ public class Order {
     @Column(name = "price")
     private Double price;
 
-    @Column(name = "delivery_price")
-    private Double deliveryPrice;
+//    @Column(name = "delivery_price")
+//    private Double deliveryPrice;
 
-    @ManyToOne
-    @JoinColumn(name = "delivery_address_id")
-    private DeliveryAddress deliveryAddress;
+//    @ManyToOne
+//    @JoinColumn(name = "delivery_address_id")
+//    private DeliveryAddress deliveryAddress;
 
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "delivery_date")
-    private LocalDateTime deliveryDate;
+//    @Column(name = "delivery_date")
+//    private LocalDateTime deliveryDate;
 
     @Column(name = "create_at")
     @CreationTimestamp

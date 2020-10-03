@@ -23,12 +23,6 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     private RoleRepository roleRepository;
     private BCryptPasswordEncoder passwordEncoder;
-//    private UserRepositorySlqO2 userProvider;
-
-//    @Autowired
-//    public void setUserProvider(UserRepositorySlqO2 userProvider) {
-//        this.userProvider = userProvider;
-//    }
 
     @Autowired
     public void setUserRepository(UserRepository userRepository) {
@@ -48,10 +42,6 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User findByUserName(String username) {
-        //return userProvider.getUser(username);
-//        List<Role> roles = roleRepository.findOneByName()
-//        User  user =  userRepository.findOneByUserName(username);
-//        user.setRoles(roles);
         return userRepository.findOneByUserName(username);
     }
 

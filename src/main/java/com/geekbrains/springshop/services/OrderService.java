@@ -2,37 +2,37 @@ package com.geekbrains.springshop.services;
 
 import com.geekbrains.springshop.entities.Order;
 import com.geekbrains.springshop.entities.OrderItem;
+import com.geekbrains.springshop.entities.Product;
 import com.geekbrains.springshop.entities.User;
 import com.geekbrains.springshop.repositories.OrderRepository;
+import com.geekbrains.springshop.repositories.ProductRepository;
 import com.geekbrains.springshop.utils.ShoppingCart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Service
 public class OrderService {
+    @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
     private OrderStatusService orderStatusService;
 
     @Autowired
-    public void setOrderRepository(OrderRepository orderRepository) {
-        this.orderRepository = orderRepository;
-    }
-
-    @Autowired
-    public void setOrderStatusService(OrderStatusService orderStatusService) {
-        this.orderStatusService = orderStatusService;
-    }
+    private ProductRepository productRepository;
 
     @Transactional
-    public Order makeOrder(ShoppingCart cart, User user) {
+    public Order createOrder(ShoppingCart cart, User user) {
         Order order = new Order();
         order.setId(0L);
         order.setUser(user);
+        order.setPhoneNumber(user.getPhone());
         order.setStatus(orderStatusService.getStatusById(1L));
         order.setPrice(cart.getTotalCost());
         order.setOrderItems(new ArrayList<>(cart.getItems()));
@@ -43,21 +43,30 @@ public class OrderService {
     }
 
     public List<Order> getAllOrders() {
-        return (List<Order>) orderRepository.findAll();
+        return orderRepository.findAll();
     }
 
     public Order findById(Long id) {
-        return orderRepository.findById(id).get();
+        return orderRepository.findById(id).orElse(null);
     }
 
-    public Order saveOrder(Order order) {
+    public void saveOrder(Order order) {
         Order orderOut = orderRepository.save(order);
         orderOut.setConfirmed(true);
-        return orderOut;
     }
 
-    public Order changeOrderStatus(Order order, Long statusId) {
+    public void changeOrderStatus(Order order, Long statusId) {
         order.setStatus(orderStatusService.getStatusById(statusId));
-        return saveOrder(order);
+        Collection<OrderItem> orderItems = order.getOrderItems();
+        for (OrderItem orderItem : orderItems){
+            Long product_id = orderItem.getProduct().getId();
+            Product product = productRepository.findOneById(product_id);
+            System.out.println(product);
+            long itemsQuantity = product.getQuantity()-orderItem.getQuantity();
+            if (itemsQuantity>=0) {
+                productRepository.decreaseProductQuantity(product_id, itemsQuantity);
+                saveOrder(order);
+            }
+        }
     }
 }

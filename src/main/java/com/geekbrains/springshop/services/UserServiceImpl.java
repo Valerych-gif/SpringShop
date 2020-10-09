@@ -48,10 +48,17 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public boolean save(SystemUser systemUser) {
+        User user = createUser(systemUser);
+        if (user == null) return false;
+        userRepository.save(user);
+        return true;
+    }
+
+    public User createUser(SystemUser systemUser) {
         User user = new User();
 
         if (findByUserName(systemUser.getUserName()) != null) {
-            return false;
+            return null;
         }
 
         user.setUserName(systemUser.getUserName());
@@ -60,11 +67,8 @@ public class UserServiceImpl implements UserService {
         user.setLastName(systemUser.getLastName());
         user.setEmail(systemUser.getEmail());
         user.setPhone(systemUser.getPhone());
-
         user.setRoles(Arrays.asList(roleRepository.findOneByName("ROLE_EMPLOYEE")));
-
-        userRepository.save(user);
-        return true;
+        return user;
     }
 
     @Override

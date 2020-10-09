@@ -32,4 +32,8 @@ public class CategoryService {
             }
         }
     }
+
+    public Category getCategoryById(Long id){
+        return categoryRepository.findOneById(id);
+    }
 }

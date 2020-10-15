@@ -9,6 +9,10 @@ import javax.servlet.http.HttpSession;
 
 @Service
 public class ShoppingCartService {
+
+    public ShoppingCartService() {
+    }
+
     private ProductService productService;
 
     @Autowired
@@ -63,4 +67,5 @@ public class ShoppingCartService {
     public double getTotalCost(HttpSession session) {
         return getCurrentCart(session).getTotalCost();
     }
+
 }

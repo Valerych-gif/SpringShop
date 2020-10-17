@@ -6,7 +6,8 @@
     <modules>
         <module>config-server</module>
 		<module>springshopApp</module>
-	</modules>
+        <module>eurika-product-service</module>
+    </modules>
     <parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>

@@ -11,8 +11,13 @@ public class GetProductsController {
     @Autowired
     private EurekaClient eurekaClient;
 
-    @GetMapping("/getproduct")
-    void getProduct(Model model){
-        System.out.println(eurekaClient.getProducts());
+    public EurekaClient getEurekaClient() {
+        return eurekaClient;
+    }
+
+    @GetMapping("/getproducts")
+    String getProduct(Model model){
+        model.addAttribute("products", eurekaClient.getProducts());
+        return "shop/shop-page";
     }
 }

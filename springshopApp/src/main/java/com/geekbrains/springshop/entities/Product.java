@@ -8,8 +8,6 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -31,8 +29,8 @@ public class Product implements Serializable {
     @Size(min = 8, max = 8, message = "требуется 8 числовых символов")
     private String vendorCode;
 
-    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "product")
-    private List<ProductImage> images;
+//    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "product")
+//    private List<ProductImage> images;
 
     @Column(name = "title")
     @NotNull(message = "не может быть пустым")
@@ -62,12 +60,12 @@ public class Product implements Serializable {
     @Column(name = "quantity")
     private Long quantity;
 
-    public void addImage(ProductImage productImage) {
-        if (images == null) {
-            images = new ArrayList<>();
-        }
-        images.add(productImage);
-    }
+//    public void addImage(ProductImage productImage) {
+//        if (images == null) {
+//            images = new ArrayList<>();
+//        }
+//        images.add(productImage);
+//    }
 
     @Override
     public String toString() {
@@ -75,7 +73,7 @@ public class Product implements Serializable {
                 "id=" + id +
                 ", category=" + category +
                 ", vendorCode='" + vendorCode + '\'' +
-                ", images=" + images +
+//                ", images=" + images +
                 ", title='" + title + '\'' +
                 ", shortDescription='" + shortDescription + '\'' +
                 ", fullDescription='" + fullDescription + '\'' +

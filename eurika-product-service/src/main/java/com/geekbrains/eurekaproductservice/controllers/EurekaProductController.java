@@ -1,4 +1,4 @@
-package com.geekbrains.eurekaproductservice;
+package com.geekbrains.eurekaproductservice.controllers;
 
 import com.geekbrains.springshop.entities.Product;
 import org.springframework.web.bind.annotation.GetMapping;

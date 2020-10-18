@@ -1,5 +1,6 @@
-package com.geekbrains.eurekaproductservice;
+package com.geekbrains.eurekaproductservice.controllers;
 
+import com.geekbrains.eurekaproductservice.services.EurekaProductService;
 import com.geekbrains.springshop.entities.Product;
 import com.netflix.discovery.EurekaClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +16,19 @@ public class EurekaProductControllerImpl implements EurekaProductController {
     private EurekaClient eurekaClient;
 
     @Autowired
-    private EurekaProductRepository eurekaProductRepository;
+    private EurekaProductService eurekaProductService;
+
+    public EurekaClient getEurekaClient() {
+        return eurekaClient;
+    }
+
+    public EurekaProductService getEurekaProductService() {
+        return eurekaProductService;
+    }
 
     @Override
     public List<Product> getProducts() {
-        return eurekaProductRepository.findAll();
+        return eurekaProductService.getProducts();
     }
 
 }

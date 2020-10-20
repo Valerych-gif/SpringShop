@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class AspectLogger {
-    Logger file = Logger.getLogger("file");
+    Logger file = Logger.getLogger("webapi");
 
     @Autowired
     CategoryService categoryService;

@@ -22,7 +22,7 @@ public class ShoppingCartTest {
     }
 
     @Test
-    public void putProductToSoppingCart(){
+    public void putProductToShoppingCart(){
         driver.get("http://localhost:8189/springshop/shop");
         List <WebElement> webElements = driver.findElements(By.cssSelector(".responsive-row"));
         WebElement webElement = webElements.get(0);

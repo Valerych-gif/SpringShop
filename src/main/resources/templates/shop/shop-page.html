@@ -25,6 +25,7 @@
             <td>
                 <p  class="font-weight-bold" th:text="${product.title}"></p>
                 <p th:text="${product.shortDescription}" class="font-weight-bold"></p>
+                <a th:href="@{'/product/' + ${product.id}}" class="btn btn-light">Подробнее</a>
             </td>
             <td th:text="${product.price}"/>
             <td>

@@ -75,7 +75,7 @@ public class Product implements Serializable {
                 "id=" + id +
                 ", category=" + category +
                 ", vendorCode='" + vendorCode + '\'' +
-                ", images=" + images +
+//                ", images=" + images +
                 ", title='" + title + '\'' +
                 ", shortDescription='" + shortDescription + '\'' +
                 ", fullDescription='" + fullDescription + '\'' +

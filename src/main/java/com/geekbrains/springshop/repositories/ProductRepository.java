@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 public interface ProductRepository extends PagingAndSortingRepository<Product, Long> {
-//public interface ProductRepository extends CrudRepository<Product, Long> {
+
     List<Product> findAllByVendorCode(String vendorCode);
 
     List<Product> findAll();
@@ -21,13 +21,8 @@ public interface ProductRepository extends PagingAndSortingRepository<Product, L
     List<Product> findAllByCategory_id(Long id);
 
     List<Product> findAllByPriceBetween(double min, double max);
-//
-//    Product findOneByTitleAndId(String title, Long id);
-//
-//  //  Product findOneByVendorCode
-//
+
     Product findOneByTitle(String title);
-//
 
     @Query(value ="select id, category_id, short_description, " +
             "create_at, full_description, title, price, vendor_code, " +
@@ -41,6 +36,4 @@ public interface ProductRepository extends PagingAndSortingRepository<Product, L
     void decreaseProductQuantity(Long id, Long itemsQuantity);
 
     Product findOneById(Long id);
-//
-//    Iterable<Product> findAll(Sort sort);
 }

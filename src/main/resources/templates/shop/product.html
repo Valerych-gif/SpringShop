@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head::head"/>
+
+<body>
+
+<div th:replace="~{fragments/navigation :: navi(Shop)}"/>
+
+<div class="container">
+    <h1 th:text="${product.title}"/>
+    <div class="card bg-dark text-white">
+        <h5 class="card-title" th:text="${product.title}"/>
+        <p class="card-text" th:text="${product.shortDescription}"/>
+        <p class="card-text" th:text="${product.fullDescription}"/>
+        <p class="card-text" th:text="|Стоимость товара ${product.price}|"/>
+    </div>
+</div>
+<footer th:replace="~{fragments/footer::footer}"/>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head::head"/>
+
+<body class="d-flex flex-column h-100">
+
+<div th:replace="~{fragments/navigation :: navi(Shop)}"/>
+
+<main role="main" class="flex-shrink-0">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <h5 th:text="|Заказ ${user.userName}|">User Name</h5>
+                <p class="card-subtitle mb-2" th:text = "|Дата заказа ${order.createAt}|">Order date</p>
+                <h6>Адрес доставки</h6>
+                <p class="card-text" th:text = "${deliveryAddress}">Delivery address</p>
+                <h6>Статус заказа</h6>
+                <p class="card-text" th:text = "${orderStatus}">Order status</p>
+                <a th:if = "${orderStatus}=='Сформирован'" th:href="@{'/admin/order/collect/' + ${order.id}}" class="btn btn-light border border-dark">Собрать заказ</a>
+                <a th:if = "${orderStatus}=='Готов к отправке'" th:href="@{'/admin/order/send/' + ${order.id}}" class="btn btn-light border border-dark">Отправить покупателю</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+            </div>
+            <div class="col-1"></div>
+            <div class="col-8">
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+
+                        <th>Категория</th>
+                        <th>Название товара</th>
+                        <th>Цена</th>
+                    </tr>
+                    </thead>
+
+                    <tr class="responsive-row" th:each="orderItem : ${orderItems}">
+                        <td th:text="${orderItem.product.category.title}"/>
+                        <td>
+                            <p class="font-weight-bold" th:text="${orderItem.product.title}"></p>
+                            <p th:text="${orderItem.product.shortDescription}" class="font-weight-bold"></p>
+                            <a th:href="@{'/product/' + ${orderItem.product.id}}" class="btn btn-light border border-dark">Подробнее</a>
+                        </td>
+                        <td th:text="${orderItem.product.price}"/>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+<footer th:replace="~{fragments/footer::footer}"/>
+</body>
+</html>

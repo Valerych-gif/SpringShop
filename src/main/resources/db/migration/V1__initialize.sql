@@ -153,7 +153,10 @@ VALUES
 
 INSERT INTO orders_statuses (title)
 VALUES
-("Сформирован");
+("Сформирован"),
+("Готов к отправке"),
+("Отправлен покупателю"),
+("Доставлен");
 
 INSERT INTO products (category_id, vendor_code, title, short_description, full_description, price, quantity)
 VALUES

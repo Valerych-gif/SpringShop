@@ -10,6 +10,23 @@
 <div class="container">
     <div class="row">
         <div class="col-sm">
+            <h5>Обработка заказов</h5>
+            <p><a th:href="@{/admin/undelivered_orders}" class="text-white"
+                  th:text="|Необработанные заказы (${undeliveredOrderCount})|">Undelivered Orders (count)</p>
+            <p><a th:href="@{/admin/orders}" class="text-white">Все заказы</a></p>
+        </div>
+        <div class="col-sm">
+            <h5>Товары</h5>
+            <p><a th:href="@{/admin/out_of_store}" class="text-white"
+                  th:text="|Закончившиеся товары (${countOfOutProducts})|">Out of Store Products (count)</p>
+            <p>
+            <a th:href="@{/admin/edit_product/0}" class="text-white">Добавить товар</a>
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm">
             <form th:action="@{/admin/addcategory}" method="post">
                 <div class="form-group">
                     <label for="categoryname" class="text-white">Category Name</label>
@@ -19,19 +36,6 @@
                 </div>
                 <button type="submit" class="btn btn-light">Add</button>
             </form>
-        </div>
-        <div class="col-sm">
-            <form th:action="@{/admin/addrole}" method="post">
-                <div class="form-group">
-                    <label for="rolename" class="text-white">Add new user's role</label>
-                    <input type="text" class="form-control" id="rolename" name="rolename">
-                </div>
-                <button type="submit" class="btn btn-light">Add</button>
-            </form>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm">
             <h1 class="text-white">Categories</h1>
             <div class="card mb-3" style="width: 18rem;" th:each="category : ${categories}">
                 <div class="card-body">
@@ -42,6 +46,13 @@
             </div>
         </div>
         <div class="col-sm">
+            <form th:action="@{/admin/addrole}" method="post">
+                <div class="form-group">
+                    <label for="rolename" class="text-white">Add new user's role</label>
+                    <input type="text" class="form-control" id="rolename" name="rolename">
+                </div>
+                <button type="submit" class="btn btn-light">Add</button>
+            </form>
             <h1 class="text-white">Users roles</h1>
             <div class="card mb-3" style="width: 18rem;" th:each="role : ${roles}">
                 <div class="card-body">

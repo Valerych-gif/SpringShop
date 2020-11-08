@@ -6,6 +6,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ public class Product implements Serializable {
 
     @Column(name = "price")
     @NotNull(message = "не может быть пустым")
-    @DecimalMin(value = "0.01", message = "минимальное значение 0")
+    @DecimalMin(value = "0.01", message = "значение должно быть больше 0")
     @Digits(integer = 10, fraction = 2)
     private double price;
 
@@ -59,7 +60,7 @@ public class Product implements Serializable {
     @UpdateTimestamp
     private LocalDateTime updateAt;
 
-    @Column(name = "quantity")
+    @Column(name="quantity")
     private Long quantity;
 
     public void addImage(ProductImage productImage) {
@@ -71,18 +72,6 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", category=" + category +
-                ", vendorCode='" + vendorCode + '\'' +
-//                ", images=" + images +
-                ", title='" + title + '\'' +
-                ", shortDescription='" + shortDescription + '\'' +
-                ", fullDescription='" + fullDescription + '\'' +
-                ", price=" + price +
-                ", createAt=" + createAt +
-                ", updateAt=" + updateAt +
-                ", quantity=" + quantity +
-                '}';
+        return "Product title = '" + title + "'";
     }
 }

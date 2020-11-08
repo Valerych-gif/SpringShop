@@ -1,40 +1,86 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:replace="fragments/head::head"/>
 
-<body>
+<body class="d-flex flex-column h-100">
 
 <div th:replace="~{fragments/navigation :: navi(Shop)}"/>
 
-<div class="container">
-    <table class="table">
-        <thead class="thead-dark">
-        <tr>
-            <th>#</th>
-            <th>Категория</th>
-            <th>Название товара</th>
-            <th>Цена</th>
-            <th></th>
-        </tr>
-        </thead>
+<main role="main" class="flex-shrink-0">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-2">
+                <h1 th:text="Фильтры" class="text-white"/>
+                <form th:action="@{/shop}" method="get" class="mb-3">
+                    <input hidden th:value="${page}" th:name="page">
+                    <div class="form-group">
+                        <label for="title" class="text-white">Поиск по названию</label>
+                        <input th:value="${word != null} ? ${word}" th:name="word" type="text" id="title"
+                               class="form-control border border-dark">
+                    </div>
+                    <div class="form-group">
+                        <label for="minCost" class="text-white">Минимальная цена</label>
+                        <input th:value="${min != null} ? ${min}" th:name="min" type="text" id="minCost"
+                               class="form-control border border-dark">
+                    </div>
+                    <div class="form-group">
+                        <label for="maxCost" class="text-white">Максимальная цена</label>
+                        <input th:value="${max != null} ? ${max}" th:name="max" type="text" id="maxCost"
+                               class="form-control border border-dark">
+                    </div>
+                    <button type="submit" class="btn btn-primary border border-dark">Фильтровать</button>
+                </form>
+            </div>
+            <div class="col-1"></div>
+            <div class="col-8">
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Категория</th>
+                        <th>Название товара</th>
+                        <th>Цена</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
 
-        <tr class="responsive-row" th:each="product : ${products}">
-            <td th:text="${product.id}"/>
-            <td th:text="${product.category.title}"/>
-            <td>
-                <p  class="font-weight-bold" th:text="${product.title}"></p>
-                <p th:text="${product.shortDescription}" class="font-weight-bold"></p>
-                <a th:href="@{'/product/' + ${product.id}}" class="btn btn-light">Подробнее</a>
-            </td>
-            <td th:text="${product.price}"/>
-            <td>
-                <a th:href="@{'/cart/add/' + ${product.id}}" class="btn btn-light">Добавить в корзину</a>
-            </td>
-        </tr>
-    </table>
+                    <tr class="responsive-row" th:each="product : ${products}">
+                        <td th:text="${product.id}"/>
+                        <td th:text="${product.category.title}"/>
+                        <td>
+                            <p class="font-weight-bold" th:text="${product.title}"></p>
+                            <p th:text="${product.shortDescription}" class="font-weight-bold"></p>
+                            <a th:href="@{'/product/' + ${product.id}}" class="btn btn-light border border-dark">Подробнее</a>
+                        </td>
+                        <td th:text="${product.price}"/>
+                        <td>
+                            <a th:href="@{'/cart/add/' + ${product.id}}" class="btn btn-light border border-dark">Добавить в корзину</a>
+                        </td>
+                        <td>
+                            <a sec:authorize="hasRole('ROLE_ADMIN')"  th:href="@{'/admin/delete_product/' + ${product.id}}" class="btn btn-light border border-dark">Убрать продукт из магазина</a>
+                        </td>
+                        <td>
+                            <a sec:authorize="hasRole('ROLE_ADMIN')"  th:href="@{'/admin/edit_product/' + ${product.id}}" class="btn btn-light border border-dark">Редактировать</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
 
-</div>
+        <nav aria-label="Shop page navigation">
+            <ul class="pagination justify-content-center">
+                <li th:each="i : ${#numbers.sequence(1, totalPage, 1)}">
+                    <a th:class="page-link" th:text="${i}" th:classappend="${page == i ? 'active' : ''}"
+                       th:href="@{'/shop/?page=' + ${i} + ${filters}}"></a>
+                </li>
+            </ul>
+        </nav>
+
+    </div>
+</main>
 <footer th:replace="~{fragments/footer::footer}"/>
 </body>
 </html>

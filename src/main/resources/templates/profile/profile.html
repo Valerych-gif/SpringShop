@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head::head"/>
+
+<body>
+
+<div th:replace="~{fragments/navigation :: navi(Shop)}"/>
+
+<div class="container">
+    <h1 th:text="${user.userName}"/>
+    <div class="card my-5" style="max-width: 960px;">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 th:text="${user.userName}" class="card-title">User Name</h5>
+                    <p th:text="${user.firstName}" class="card-text">First Name</p>
+                    <p th:text="${user.lastName}" class="card-text">Last Name</p>
+                    <p th:text="${user.phone}" class="card-text">Last Name</p>
+                    <p th:text="${user.email}" class="card-text">Last Name</p>
+                    <div  th:each="order : ${orders}">
+                        <p class="card-text">
+                            <a th:text="|Заказ от ${order.createAt}|" th:href="@{'/profile/order/' + ${order.id}}">Order</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="~{fragments/footer::footer}"/>
+</body>
+</html>

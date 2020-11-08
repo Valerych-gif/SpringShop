@@ -15,6 +15,7 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderService {
@@ -61,12 +62,28 @@ public class OrderService {
         for (OrderItem orderItem : orderItems){
             Long product_id = orderItem.getProduct().getId();
             Product product = productRepository.findOneById(product_id);
-            System.out.println(product);
             long itemsQuantity = product.getQuantity()-orderItem.getQuantity();
             if (itemsQuantity>=0) {
                 productRepository.decreaseProductQuantity(product_id, itemsQuantity);
-                saveOrder(order);
+            } else {
+                return;
             }
         }
+        orderRepository.save(order);
+    }
+
+    public List<Order> getOrdersByUserId(Long id){
+        return orderRepository.findAllByUserId(id);
+    }
+
+    public List<OrderItem> getOrderItems(Long order_id){
+        Order order = findById(order_id);
+        return order.getOrderItems();
+    }
+
+    public List<Order> getAllUndeliveredOrders() {
+        return getAllOrders().stream()
+                .filter(order -> !order.getStatus().getTitle().equals("Доставлен"))
+                .collect(Collectors.toList());
     }
 }

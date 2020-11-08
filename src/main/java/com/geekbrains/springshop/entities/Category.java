@@ -1,7 +1,5 @@
 package com.geekbrains.springshop.entities;
 
-import lombok.Data;
-
 import javax.persistence.*;
 
 @Entity

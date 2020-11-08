@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head::head"/>
+
+<body class="d-flex flex-column h-100">
+
+<div th:replace="~{fragments/navigation :: navi(Shop)}"/>
+
+<main role="main" class="flex-shrink-0">
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th>#</th>
+            <th>Наименование</th>
+            <th>Краткое описание</th>
+            <th>Цена</th>
+            <th></th>
+        </tr>
+        </thead>
+
+        <tr class="responsive-row" th:each="product : ${products}">
+            <td th:text="${product.id}"/>
+            <td th:text="${product.title}"/>
+            <td th:text="${product.shortDescription}"/>
+            <td th:text="${product.price}"/>
+            <td>
+                <a th:href="@{'/admin/edit_product/' + ${product.id}}" class="btn btn-light border border-dark">Редактировать</a>
+            </td>
+        </tr>
+    </table>
+</main>
+<footer th:replace="~{fragments/footer::footer}"/>
+</body>
+</html>

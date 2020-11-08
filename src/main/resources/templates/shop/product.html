@@ -5,15 +5,25 @@
 
 <body>
 
-<div th:replace="~{fragments/navigation :: navi(Shop)}"/>
+<navi th:replace="~{fragments/navigation :: navi(Shop)}"/>
 
 <div class="container">
     <h1 th:text="${product.title}"/>
-    <div class="card bg-dark text-white">
-        <h5 class="card-title" th:text="${product.title}"/>
-        <p class="card-text" th:text="${product.shortDescription}"/>
-        <p class="card-text" th:text="${product.fullDescription}"/>
-        <p class="card-text" th:text="|Стоимость товара ${product.price}|"/>
+    <div class="card my-5" style="max-width: 960px;">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <img th:attr="src=@{/images/} + ${imgSrc}, alt=${imgSrc}" class="card-img">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 th:text="${product.title}" class="card-title">Title</h5>
+                    <p th:text="${product.shortDescription}" class="card-text">Short description</p>
+                    <p th:text="${product.fullDescription}" class="card-text">Full description</p>
+                    <p th:text="|Стоимость товара ${product.price}|" class="card-text">Price</p>
+                </div>
+                <a th:href="@{'/shop/cart/add/' + ${product.id}}" class="btn btn-light border border-dark">Добавить в корзину</a>
+            </div>
+        </div>
     </div>
 </div>
 <footer th:replace="~{fragments/footer::footer}"/>

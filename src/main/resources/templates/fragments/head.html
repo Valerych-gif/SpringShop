@@ -1,27 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <html lang="en">
-<head th:fragment = "head">
+<head th:fragment="head">
     <meta charset="UTF-8">
     <title>SpringShop</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Oswald:400,700|Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{~/springshop/fonts/icomoon/style.css}">
-    <link rel="stylesheet" th:href="@{~/springshop/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" th:href="@{~/springshop/css/animate.css}">
     <link rel="stylesheet" th:href="@{~/springshop/css/owl.carousel.min.css}">
     <link rel="stylesheet" th:href="@{~/springshop/css/owl.theme.default.min.css}">
-    <link rel="stylesheet" th:href="@{~/springshop/css/bootstrap-datepicker.css}">
+<!--    <link rel="stylesheet" th:href="@{~/springshop/css/bootstrap-datepicker.css}">-->
 
 
     <link rel="stylesheet" th:href="@{~/springshop/fonts/flaticon/font/flaticon.css}">
 
     <link rel="stylesheet" th:href="@{~/springshop/css/aos.css}">
     <link rel="stylesheet" th:href="@{~/springshop/css/jquery.fancybox.min.css}">
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
 
-
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
     <link rel="stylesheet" th:href="@{~/springshop/css/style.css}">
+
 </head>
 <body>
 

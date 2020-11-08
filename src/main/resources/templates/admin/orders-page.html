@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head::head"/>
+
+<body>
+
+<div th:replace="~{fragments/navigation :: navi(AdminDashboard)}"/>
+
+<div class="container">
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th>#</th>
+            <th>Покупатель</th>
+            <th>Дата заказа</th>
+            <th>Стоимость</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+
+        <tr class="responsive-row" th:each="order : ${orders}">
+            <td th:text="${order.id}"/>
+            <td th:text="${order.user.userName}"/>
+            <td th:text="${order.createAt}"/>
+            <td th:text="${order.price}"/>
+            <td>
+                <a th:href="@{'/admin/order/' + ${order.id}}" class="btn btn-light border border-dark">Просмотр заказа</a>
+            </td>
+            <td>
+                <a th:if = "${orderStatus}=='Готов к отправке'" th:href="@{'/admin/order/send/' + ${order.id}}" class="btn btn-light border border-dark">Отправить покупателю</a>
+            </td>
+        </tr>
+    </table>
+</div>
+<div th:replace="~{fragments/footer::footer}"/>
+</body>
+</html>

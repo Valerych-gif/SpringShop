@@ -4,16 +4,9 @@
 <html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-
-    <script type="text/javascript" th:src="@{/webjars/jquery/3.3.1/dist/jquery.min.js}"></script>
-    <script type="text/javascript" th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
-    <script type="text/javascript" th:src="@{/js/main.js}"></script>
-    <link type="text/css" rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}"/>
-    <link type="text/css" rel="stylesheet" th:href="@{/css/main.css}"/>
 </head>
 <body>
-<div class="site-navbar-wrap" th:fragment="navi(activeTab)">
+<navi class="site-navbar-wrap" th:fragment="navi(activeTab)">
 
     <div class="site-navbar site-navbar-target js-sticky-header">
         <div class="container">
@@ -54,10 +47,10 @@
                                 <li class="nav-item" sec:authorize="isAnonymous()">
                                     <a class="nav-link" th:href="@{/login}">Войти</a>
                                 </li>
-                                <li class="nav-item" sec:authorize="isAuthenticated()">
-                                    <form th:action="@{/logout}" method="POST">
-                                        <input type="submit" class="nav-link" value="Logout"/>
-                                    </form>
+                                <li class="nav-item" sec:authorize="isAuthenticated()" th:classappend="${activeTab == 'Profile' ? 'active' : ''}">
+                                    <form th:action="@{/logout}" method="POST" id="logout"></form>
+                                    <a th:href="@{/profile}" th:text="${session.user.userName}">UserName</a>
+                                    <a href="#" onclick="document.getElementById('logout').submit();">Logout</a>
                                 </li>
                             </ul>
                         </div>
@@ -66,7 +59,7 @@
             </div>
         </div>
     </div>
-</div> <!-- END .site-navbar-wrap -->
+</navi> <!-- END .site-navbar-wrap -->
 
 </body>
 </html>

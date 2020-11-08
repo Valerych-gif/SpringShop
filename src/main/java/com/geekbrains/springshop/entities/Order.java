@@ -19,8 +19,7 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-//    @JsonBackReference
-    private com.geekbrains.springshop.entities.User user;
+    private User user;
 
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "order", fetch = FetchType.EAGER)
     private List<OrderItem> orderItems;
@@ -32,18 +31,8 @@ public class Order {
     @Column(name = "price")
     private Double price;
 
-//    @Column(name = "delivery_price")
-//    private Double deliveryPrice;
-
-//    @ManyToOne
-//    @JoinColumn(name = "delivery_address_id")
-//    private DeliveryAddress deliveryAddress;
-
     @Column(name = "phone_number")
     private String phoneNumber;
-
-//    @Column(name = "delivery_date")
-//    private LocalDateTime deliveryDate;
 
     @Column(name = "create_at")
     @CreationTimestamp

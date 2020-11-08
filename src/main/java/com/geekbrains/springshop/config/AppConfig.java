@@ -12,6 +12,7 @@ import java.util.Locale;
 
 @Configuration
 @EnableAspectJAutoProxy
+@PropertySource("classpath:private.properties")
 @ComponentScan("com.geekbrains.geekmarketwinter")
 public class AppConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

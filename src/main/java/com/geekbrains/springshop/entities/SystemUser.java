@@ -35,7 +35,7 @@ public class SystemUser {
 
     @NotNull(message = "is required")
     @Size(min = 1, message = "is required")
-    @Email
+    @Email(message = "Is not match email format")
     private String email;
 
     @NotNull(message = "is required")

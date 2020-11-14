@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head::head"/>
+
+<body class="d-flex flex-column h-100">
+
+<div th:replace="~{fragments/navigation :: navi(Shop)}"/>
+
+<main role="main" class="flex-shrink-0">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-8">
+                <h5 class="text-white">Стататус заказа</h5>
+                <p class="text-white" th:text="${order.status.title}">Order Status</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-8">
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+
+                        <th>Категория</th>
+                        <th>Название товара</th>
+                        <th>Цена</th>
+                    </tr>
+                    </thead>
+
+                    <tr class="responsive-row" th:each="orderItem : ${orderItems}">
+                        <td th:text="${orderItem.product.category.title}"/>
+                        <td>
+                            <p class="font-weight-bold" th:text="${orderItem.product.title}"></p>
+                            <p th:text="${orderItem.product.shortDescription}" class="font-weight-bold"></p>
+                            <a th:href="@{'/product/' + ${orderItem.product.id}}" class="btn btn-light border border-dark">Подробнее</a>
+                        </td>
+                        <td th:text="${orderItem.product.price}"/>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+<footer th:replace="~{fragments/footer::footer}"/>
+</body>
+</html>
